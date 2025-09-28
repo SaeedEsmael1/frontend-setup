@@ -2,6 +2,8 @@ import { faBars, faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 
+import { useAuth, UserButton } from '@clerk/clerk-react';
+
 import PageLink from './PageLink';
 const PAGES_LINKS = [
   {
@@ -29,19 +31,11 @@ const PAGES_LINKS = [
     path: '/contact',
     text: 'Contact',
   },
-  {
-    id: 6,
-    path: '/register',
-    text: 'Register',
-  },
-  {
-    id: 7,
-    path: '/login',
-    text: 'Login',
-  },
 ];
-const UserLogedIn = false;
+
 const Header = ({ isDark, toggleTheme }) => {
+  const { isSignedIn } = useAuth();
+
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
@@ -68,7 +62,7 @@ const Header = ({ isDark, toggleTheme }) => {
             >
               {PAGES_LINKS.map((pageLink) => {
                 if (pageLink.path === '/courses') {
-                  if (UserLogedIn === true) {
+                  if (isSignedIn) {
                     return (
                       <PageLink
                         key={pageLink.id}
@@ -91,6 +85,24 @@ const Header = ({ isDark, toggleTheme }) => {
                   />
                 );
               })}
+
+              {isSignedIn ? (
+                <UserButton />
+              ) : (
+                <>
+                  <PageLink
+                    path={'/register'}
+                    text={'Register'}
+                    setIsCollapsed={setIsCollapsed}
+                  />
+
+                  <PageLink
+                    path={'/login'}
+                    text={'Login'}
+                    setIsCollapsed={setIsCollapsed}
+                  />
+                </>
+              )}
             </ul>
           </div>
           {/* Dark & light mood */}

@@ -11,6 +11,7 @@
     "fix": "prettier . --write && npm run lint"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.49.0",
     "@fortawesome/fontawesome-svg-core": "^7.0.1",
     "@fortawesome/free-brands-svg-icons": "^7.0.1",
     "@fortawesome/free-regular-svg-icons": "^7.0.1",

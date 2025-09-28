@@ -11,6 +11,8 @@ import {
   Contact,
   Register,
   Login,
+  ProtectedRoute,
+  NotFoundPage,
 } from './pages';
 
 const routes = createBrowserRouter([
@@ -28,7 +30,12 @@ const routes = createBrowserRouter([
       },
       {
         path: '/courses',
-        element: <Courses />,
+
+        element: (
+          <ProtectedRoute>
+            <Courses />,
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/about',
@@ -43,10 +50,22 @@ const routes = createBrowserRouter([
         element: <Register />,
       },
       {
+        path: '/register/*',
+        element: <Register />,
+      },
+      {
         path: '/login',
         element: <Login />,
       },
+      {
+        path: '/login/*',
+        element: <Login />,
+      },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
   },
 ]);
 

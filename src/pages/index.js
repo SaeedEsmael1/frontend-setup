@@ -6,3 +6,5 @@ export * from './About';
 export * from './Contact';
 export * from './Register';
 export * from './Login';
+export * from './ProtectedRoute';
+export * from './NotFoundPage';
